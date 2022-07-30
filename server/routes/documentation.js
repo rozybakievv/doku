@@ -1,26 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { getAllDocumentations, createDocumentation, modifyDocumentation, deleteDocumentation } = require('../controllers/documentationController');
 
-// gets all the documentations
-router.get('/', (req, res) => {
-    res.json({ "message": "Get documentations"});
-})
+router.get('/', getAllDocumentations())
 
-// need to get only 6 documentation filterd by recent and/or most popular etc
+router.post('/', createDocumentation())
 
-// creates a new documentation
-router.post('/', (req, res) => {
-    res.json({ "message": "Create documentation"});
-})
+router.put('/:id', modifyDocumentation())
 
-// modifies a documentation
-router.put('/:id', (req, res) => {
-    res.json({ "message": `Update documentation ${req.params.id}`});
-})
-
-// modifies a documentation
-router.delete('/:id', (req, res) => {
-    res.json({ "message": `Update documentation ${req.params.id}`});
-})
+router.delete('/:id', deleteDocumentation())
 
 module.exports = router;
