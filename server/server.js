@@ -4,6 +4,9 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // this route will look into the folder to get the documentation.js file
 app.use('/api/documentation', require('./routes/documentation'));
 
