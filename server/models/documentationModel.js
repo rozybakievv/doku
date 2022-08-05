@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 
 const documentationScheme = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
     title: {
         type: String,
-        require: [true, 'please add a title to the document']
+        required: [true, 'please add a title to the document']
     },
-    description: {
+    document: {
         type: String,
-        require: [true, 'please add a description to the document']
+        required: [true, 'please add a description to the document']
     }
 }, {
     timestamps: true

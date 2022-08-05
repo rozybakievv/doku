@@ -2,28 +2,44 @@ const asyncHandler = require('express-async-handler');
 const Documentation = require('../models/documentationModel');
 
 // @route  GET /api/documentation
+// @access PUBLIC
 const getAllDocumentations = asyncHandler(async(req, res) => {
     const documentations = await Documentation.find();
     res.json(documentations);
 })
 
+// @route  GET /api/documentation/:id
+// @access PUBLIC
+const getDocumentation = asyncHandler(async(req, res) => {
+    const documentation = await Documentation.findById(req.params.id);
+
+    if(!documentation) {
+        res.status(400);
+        throw new Error('Documentation not found');
+    }
+
+    res.json(documentation);
+})
+
 // @route  POST /api/documentation
+// @access PRIVATE
 const createDocumentation = asyncHandler(async(req, res) => {
-    console.log('tries to create');
-    if(!req.body) {
+    if(!req.body.title || !req.body.user) {
         res.status(400);
         throw new Error('Please add body data');
     }
 
     const createDocument = await Documentation.create({
+        user: req.body.user,
         title: req.body.title,
-        description: req.body.description
+        document: req.body.document
     });
 
     res.json(createDocument);
 })
 
 // @route  PUT /api/documentation/:id
+// @access PRIVATE
 const modifyDocumentation = asyncHandler(async(req, res) => {
     const findDocumentId = await Documentation.findById(req.params.id);
 
@@ -38,6 +54,7 @@ const modifyDocumentation = asyncHandler(async(req, res) => {
 })
 
 // @route  DELETE /api/documentation/:id
+// @access PRIVATE
 const deleteDocumentation = asyncHandler(async(req, res) => {
     const findDocumentId = await Documentation.findById(req.params.id);
 
@@ -55,6 +72,7 @@ const deleteDocumentation = asyncHandler(async(req, res) => {
 
 module.exports = {
     getAllDocumentations,
+    getDocumentation,
     createDocumentation,
     modifyDocumentation,
     deleteDocumentation,

@@ -11,6 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // this route will look into the folder to get the documentation.js file
-app.use('/api/documentation', require('./routes/documentation'));
+app.use('/api/documentations', require('./routes/documentationsRoute'));
+
+// this route will look into the folder to get the users.js file
+app.use('/api/users', require('./routes/usersRoute'));
 
 app.listen(PORT, () => { console.log(`Server started on port ${PORT}`)});
