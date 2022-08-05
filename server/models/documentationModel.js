@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
 const documentationScheme = mongoose.Schema({
-    user: {
+    creatorId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    creator: {
+        type: String,
+        required: true
     },
     title: {
         type: String,

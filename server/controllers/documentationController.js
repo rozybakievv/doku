@@ -21,16 +21,30 @@ const getDocumentation = asyncHandler(async(req, res) => {
     res.json(documentation);
 })
 
+// @route  GET /api/documentation/:username
+// @access PUBLIC
+const getUserDocumentation = asyncHandler(async(req, res) => {
+    const usersDocumentation = await Documentation.find({ creator: req.params.username });
+
+    if(!usersDocumentation) {
+        res.status(400);
+        throw new Error('User documentation not found');
+    }
+
+    res.json(usersDocumentation);
+})
+
 // @route  POST /api/documentation
 // @access PRIVATE
 const createDocumentation = asyncHandler(async(req, res) => {
-    if(!req.body.title || !req.body.user) {
+    if(!req.body.title || !req.user.id || !req.body.document) {
         res.status(400);
         throw new Error('Please add body data');
     }
 
     const createDocument = await Documentation.create({
-        user: req.body.user,
+        creatorId: req.user.id,
+        creator: req.user.username,
         title: req.body.title,
         document: req.body.document
     });
@@ -41,26 +55,30 @@ const createDocumentation = asyncHandler(async(req, res) => {
 // @route  PUT /api/documentation/:id
 // @access PRIVATE
 const modifyDocumentation = asyncHandler(async(req, res) => {
-    const findDocumentId = await Documentation.findById(req.params.id);
+    // find document where creator is current user and document is id from parameters
+    const findDocumentId = await Documentation.find({ creatorId: req.user.id, _id: req.params.id });
 
     if(!findDocumentId) {
         res.status(400);
-        throw new Error('Documentation not found');
+        throw new Error('Documentation not found or not created by current user');
     }
 
-    const updateDocument = await Documentation.findByIdAndUpdate(req.params.id, req.body);
+    await Documentation.findByIdAndUpdate(req.params.id, req.body);
 
-    res.json(updateDocument);
+    const updatedDocument = await Documentation.findById(req.params.id);
+
+    res.json(updatedDocument);
 })
 
 // @route  DELETE /api/documentation/:id
 // @access PRIVATE
 const deleteDocumentation = asyncHandler(async(req, res) => {
-    const findDocumentId = await Documentation.findById(req.params.id);
+    // find document where creator is current user and document is id from parameters
+    const findDocumentId = await Documentation.find({ creatorId: req.user.id, _id: req.params.id });
 
     if(!findDocumentId) {
         res.status(400);
-        throw new Error('Documentation not found');
+        throw new Error('Documentation not found or not created by current user');
     }
 
     await findDocumentId.remove();
@@ -73,6 +91,7 @@ const deleteDocumentation = asyncHandler(async(req, res) => {
 module.exports = {
     getAllDocumentations,
     getDocumentation,
+    getUserDocumentation,
     createDocumentation,
     modifyDocumentation,
     deleteDocumentation,
