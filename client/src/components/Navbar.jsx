@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	return (
-		<nav className="flex flex-wrap items-center justify-between px-12 py-8">
+		<nav className="flex flex-wrap items-center justify-between">
 			{/* title */}
 			<div className="flex items-center flex-shrink-0">
 				<Link to="/">
-					<h1 className="text-3xl font-bold">doku</h1>
+					<h1 className="text-3xl font-extrabold">doku!</h1>
 				</Link>
 			</div>
 
@@ -22,12 +22,12 @@ const Navbar = () => {
 				<div className="md:flex-grow"></div>
 				<div>
 					<Link to="/register">
-						<button type="button" className="block mr-8 md:inline-block md:mt-0">
+						<button type="button" className="block mr-8 md:inline-block md:mt-0 text-violet-400 font-bold">
 							register
 						</button>
 					</Link>
 					<Link to="/login">
-						<button type="button" className="block md:inline-block md:mt-0 px-4 py-2 rounded-lg bg-indigo-200 border-indigo-500 hover:border-2">
+						<button type="button" className="block md:inline-block md:mt-0 px-4 py-2 duration-300 rounded-xl border-4 border-violet-400 hover:bg-violet-500">
 							login
 						</button>
 					</Link>

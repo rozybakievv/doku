@@ -14,10 +14,7 @@ const documentationScheme = mongoose.Schema({
         type: String,
         required: [true, 'please add a title to the document']
     },
-    document: {
-        type: String,
-        required: [true, 'please add a description to the document']
-    }
+    chapters: [{ title: String, content: String }]
 }, {
     timestamps: true
 })

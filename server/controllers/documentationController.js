@@ -37,7 +37,7 @@ const getUserDocumentation = asyncHandler(async(req, res) => {
 // @route  POST /api/documentation
 // @access PRIVATE
 const createDocumentation = asyncHandler(async(req, res) => {
-    if(!req.body.title || !req.user.id || !req.body.document) {
+    if(!req.body.title || !req.body.chapters) {
         res.status(400);
         throw new Error('Please add body data');
     }
@@ -46,7 +46,7 @@ const createDocumentation = asyncHandler(async(req, res) => {
         creatorId: req.user.id,
         creator: req.user.username,
         title: req.body.title,
-        document: req.body.document
+        chapters: req.body.chapters
     });
 
     res.json(createDocument);
@@ -81,7 +81,7 @@ const deleteDocumentation = asyncHandler(async(req, res) => {
         throw new Error('Documentation not found or not created by current user');
     }
 
-    await findDocumentId.remove();
+    await Documentation.findByIdAndDelete(req.params.id);
 
     res.json(`Document ${req.params.id} was deleted`);
 })

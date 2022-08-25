@@ -5,7 +5,7 @@ import Login from './pages/Login';
 
 const App = () => {
 	return (
-		<div>
+		<div className='px-12 py-8'>
 			<BrowserRouter>
 				<Routes>
 					<Route path='/' element={<Home/>} />

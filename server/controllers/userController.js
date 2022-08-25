@@ -14,7 +14,7 @@ const generateJwt = (id) => {
 // @route GET /api/users/profile
 // @access PRIVATE
 const getCurrentUser = asyncHandler(async(req, res) => {
-    // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user
+    // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user id
     const { _id, email, username, firstname, lastname } = await User.findById(req.user.id);
     
     res.status(200).json({
@@ -111,7 +111,7 @@ const deleteUser = asyncHandler(async(req, res) => {
         throw new Error('User not found');
     }
 
-    await findUserId.remove();
+    await User.findByIdAndDelete(req.params.id);
 
     res.json(`User ${findUserId.username} was deleted`);
 })
