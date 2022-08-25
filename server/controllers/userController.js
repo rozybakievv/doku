@@ -15,21 +15,22 @@ const generateJwt = (id) => {
 // @access PRIVATE
 const getCurrentUser = asyncHandler(async(req, res) => {
     // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user id
-    const { _id, email, username, firstname, lastname } = await User.findById(req.user.id);
+    const { _id, email, username, firstname, lastname, description } = await User.findById(req.user.id);
     
     res.status(200).json({
         id: _id,
         email: email,
         username: username,
         firstname: firstname,
-        lastname: lastname
+        lastname: lastname,
+        description: description
     })
 })
 
 // @route POST /api/users/
 // @access PUBLIC
 const registerUser = asyncHandler(async(req, res) => {
-    const { username, email, password, firstname, lastname } = req.body;
+    const { username, email, password, firstname, lastname, description } = req.body;
     
     if(!username || !email || !password || !firstname || !lastname) {
         res.status(400);
@@ -53,7 +54,8 @@ const registerUser = asyncHandler(async(req, res) => {
         email,
         password: hashedpwd,
         firstname,
-        lastname
+        lastname,
+        description
     })
 
     // create user

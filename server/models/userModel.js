@@ -23,9 +23,8 @@ const userScheme = mongoose.Schema({
         type: String,
         required: [true, 'please enter a first lastname']
     },
-    picture: {
-        data: Buffer,
-        contentType: String
+    description: {
+        type: String
     },
 }, {
     timestamps: true
