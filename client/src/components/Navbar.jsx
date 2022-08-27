@@ -12,25 +12,21 @@ const Navbar = () => {
 
 			{/* burger menu */}
 			<div className="block md:hidden">
-				<button className="flex items-center px-3 py-2 text-black border border-black rounded border-2">
+				<button className="flex items-center px-3 py-2 text-black border-black rounded border-2">
 					<svg className="w-3 h-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
 				</button>
 			</div>
 
-			
+			{/* right buttons */}
 			<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
 				<div className="md:flex-grow"></div>
 				<div>
-					<Link to="/register">
-						<button type="button" className="block mr-8 md:inline-block md:mt-0 text-violet-400 font-bold">
-							register
-						</button>
-					</Link>
-					<Link to="/login">
-						<button type="button" className="block md:inline-block md:mt-0 px-4 py-2 duration-300 rounded-xl border-4 border-violet-400 hover:bg-violet-500">
-							login
-						</button>
-					</Link>
+					<button type="button" className="block mr-8 md:inline-block md:mt-0 text-violet-600 font-bold">
+						register
+					</button>
+					<button type="button" className="block md:inline-block md:mt-0 px-4 py-2 duration-200 rounded-xl font-bold border-4 border-violet-600 hover:border-violet-400">
+						login
+					</button>
 				</div>
 			</div>
 		</nav>

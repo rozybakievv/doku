@@ -6,8 +6,3 @@
 	margin: 0;
 	padding: 0;
 }
-
-.grid-home-layout {
-	display: grid;
-	grid-template-columns: 85% 15%;
-}
