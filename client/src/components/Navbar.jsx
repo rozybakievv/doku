@@ -21,10 +21,10 @@ const Navbar = () => {
 			<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
 				<div className="md:flex-grow"></div>
 				<div>
-					<button type="button" className="block mr-8 md:inline-block md:mt-0 text-violet-600 font-bold">
+					<button type="button" className="block mr-8 md:inline-block md:mt-0 font-bold">
 						register
 					</button>
-					<button type="button" className="block md:inline-block md:mt-0 px-4 py-2 duration-200 rounded-xl font-bold border-4 border-violet-600 hover:border-violet-400">
+					<button type="button" className="block bg-multicolor md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400">
 						login
 					</button>
 				</div>

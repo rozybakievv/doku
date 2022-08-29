@@ -1,7 +1,9 @@
 const LoginModal = () => {
-  return (
-    <div>LoginModal</div>
-  )
+	return (
+		<div>
+		
+		</div>
+	)
 }
 
 export default LoginModal

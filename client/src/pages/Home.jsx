@@ -13,11 +13,11 @@ const Home = () => {
 					{/* search & filter bar */}
 					<div className='flex flex-row items-center'>
 						{/* search bar */}
-						<input type="Search" placeholder='Search for a document' className='block w-1/3 rounded-xl border-4 border-violet-600 outline-none duration-200 p-2 hover:border-violet-500 placeholder:italic placeholder:text-slate-400 '/>
+						<input type="Search" placeholder='Search for a document' className='block w-1/3 rounded-xl border-4 outline-none duration-200 p-2 placeholder:italic text-black'/>
 
 						{/* filter */}
-						<div className='ml-8 rounded-xl bg-violet-600 px-4 py-3 text-white hover:cursor-pointer duration-200'>New</div>
-						<div className='ml-8 rounded-xl px-4 py-3 border-2 border-violet-600 hover:cursor-pointer hover:border-violet-400 duration-200'>Popularity</div>
+						<div className='ml-8 rounded-xl bg-multicolor px-4 py-3 text-white hover:cursor-pointer duration-200'>New</div>
+						<div className='ml-8 px-4 py-3 hover:cursor-pointer duration-200'>Popularity</div>
 					</div>
 
 					{/* documentation results filtered */}
