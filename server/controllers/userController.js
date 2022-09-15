@@ -11,12 +11,11 @@ const generateJwt = (id) => {
     });
 }
 
-// @route GET /api/users/profile
-// @access PRIVATE
-const getCurrentUser = asyncHandler(async(req, res) => {
-    // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user id
-    const { _id, email, username, firstname, lastname, description } = await User.findById(req.user.id);
-    
+// @route POST /api/users/:id
+// @access PUBLIC
+const getUserById = asyncHandler(async(req, res) => {
+    const { _id, email, username, firstname, lastname, description } = await User.findById(req.params.id);
+
     res.status(200).json({
         id: _id,
         email: email,
@@ -64,7 +63,7 @@ const registerUser = asyncHandler(async(req, res) => {
             _id: createUser.id,
             username: createUser.username,
             email: createUser.email,
-            token: generateJwt(user._id)
+            token: generateJwt(User._id)
         });
     } else {
         res.status(400);
@@ -81,7 +80,7 @@ const authenticateUser = asyncHandler(async(req, res) => {
 
     // check if user exists and if the hashed password compares with bcrypt, then send a jwt
     if(user && (await bcrypt.compare(password, user.password))) {
-        res.status(201).json({ token: generateJwt(user._id) });
+        res.status(201).json({ token: generateJwt(user._id), id: user._id });
     } else {
         res.status(400);
         throw new Error('Invalid credentials');
@@ -91,14 +90,15 @@ const authenticateUser = asyncHandler(async(req, res) => {
 // @route PUT /api/users/:id
 // @access PRIVATE
 const modifyUser = asyncHandler(async(req, res) => {
-    const findUserId = await User.findById(req.params.id);
+    // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user id
+    const findUserId = await User.findById(req.user.id);
 
     if(!findUserId) {
         res.status(400);
         throw new Error('User not found');
     }
 
-    const updateUser = await User.findByIdAndUpdate(req.params.id, req.body);
+    const updateUser = await User.findByIdAndUpdate(req.user.id, req.body);
 
     res.json(updateUser);
 })
@@ -106,20 +106,21 @@ const modifyUser = asyncHandler(async(req, res) => {
 // @route DELETE /api/users/:id
 // @access PRIVATE
 const deleteUser = asyncHandler(async(req, res) => {
-    const findUserId = await User.findById(req.params.id);
+    // req.user will be whatever user is authenticated since the routes passes by the function protect and sets req.user to the current user id
+    const findUserId = await User.findById(req.user.id);
 
     if(!findUserId) {
         res.status(400);
         throw new Error('User not found');
     }
 
-    await User.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.user.id);
 
     res.json(`User ${findUserId.username} was deleted`);
 })
 
 module.exports = {
-    getCurrentUser,
+    getUserById,
     registerUser,
     authenticateUser,
     modifyUser,

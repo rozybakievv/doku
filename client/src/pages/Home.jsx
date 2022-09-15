@@ -1,12 +1,21 @@
 import Navbar from '../components/Navbar';
 import Document from '../components/Document';
 import LoginModal from '../components/LoginModal';
+import { useState } from 'react';
 
 const Home = () => {
+	const [closed, setClosed] = useState(true);
+
+	// function that takes the data from child component loginmodal and sets the closed to true if cancel is pressed on modal
+	const callbackStateModal = (data) => {
+		setClosed(data);
+	}
+
 	return (
 		<div>
-			<Navbar/>
-			<LoginModal/>
+			<Navbar open={callbackStateModal}/>
+
+			{ closed === false ? <LoginModal close = {callbackStateModal}/> : <div></div> }
 
 			{/* home content */}
 			<div className='mt-20'>

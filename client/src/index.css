@@ -11,15 +11,3 @@ body {
 	color: white;
 	background-color: rgb(39 39 42 / 1);
 }
-
-.bg-multicolor {
-	background-color:#99c7ff;
-	background-image:
-	radial-gradient(at 58% 29%, hsla(338,74%,76%,1) 0px, transparent 50%),
-	radial-gradient(at 21% 43%, hsla(341,92%,74%,1) 0px, transparent 50%),
-	radial-gradient(at 25% 43%, hsla(1,79%,69%,1) 0px, transparent 50%),
-	radial-gradient(at 2% 12%, hsla(322,72%,60%,1) 0px, transparent 50%),
-	radial-gradient(at 19% 73%, hsla(351,98%,69%,1) 0px, transparent 50%),
-	radial-gradient(at 13% 84%, hsla(214,74%,66%,1) 0px, transparent 50%),
-	radial-gradient(at 85% 19%, hsla(245,77%,62%,1) 0px, transparent 50%);
-}

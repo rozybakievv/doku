@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+	const open = () => {
+		props.open(false);
+	}
+
 	return (
 		<nav className="flex flex-wrap items-center justify-between">
 			{/* title */}
@@ -24,7 +28,7 @@ const Navbar = () => {
 					<button type="button" className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
 						register
 					</button>
-					<button type="button" className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2">
+					<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
 						login
 					</button>
 				</div>
