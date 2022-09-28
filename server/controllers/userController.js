@@ -14,16 +14,9 @@ const generateJwt = (id) => {
 // @route POST /api/users/:id
 // @access PUBLIC
 const getUserById = asyncHandler(async(req, res) => {
-    const { _id, email, username, firstname, lastname, description } = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
 
-    res.status(200).json({
-        id: _id,
-        email: email,
-        username: username,
-        firstname: firstname,
-        lastname: lastname,
-        description: description
-    })
+    res.status(200).json(user);
 })
 
 // @route POST /api/users/

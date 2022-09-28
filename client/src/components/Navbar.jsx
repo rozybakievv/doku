@@ -10,12 +10,8 @@ const Navbar = (props) => {
 		props.open(false);
 	}
 
-	const test = () => {
-		console.log(tokenMethod.token);
-	}
-
 	return (
-		<nav className="flex flex-wrap items-center justify-between">
+		<nav className="flex flex-wrap items-center justify-between mb-20">
 			{/* title */}
 			<div className="flex items-center flex-shrink-0">
 				<Link to="/">
@@ -36,7 +32,7 @@ const Navbar = (props) => {
 				<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
 					<div className="md:flex-grow"></div>
 					<div>
-						<button type="button" onClick={test} className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
+						<button type="button" className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
 							register
 						</button>
 						<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
@@ -48,12 +44,14 @@ const Navbar = (props) => {
 				<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
 					<div className="md:flex-grow"></div>
 					<div>
-						<button type="button" onClick={test} className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
+						<button type="button" className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
 							post
 						</button>
-						<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
-							Welcome { userMethod.user.username }
-						</button>
+						<Link to="/profile">
+							<button type="button" className="block bg-neutral-600 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-offset-2">
+								welcome { userMethod.user.username }
+							</button>
+						</Link>
 					</div>
 				</div>
 			}

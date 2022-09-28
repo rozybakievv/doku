@@ -1,16 +1,32 @@
 import Navbar from '../components/Navbar';
 import Document from '../components/Document';
 import LoginModal from '../components/LoginModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
 	const [closed, setClosed] = useState(true);
+	const [documents, setDocuments] = useState([]);
 
 	// function that takes the data from child component loginmodal and sets the closed to true if cancel is pressed on modal
 	const callbackStateModal = (data) => {
 		setClosed(data);
 	}
 
+	const getDocuments = async() => {
+		const response = await fetch('/api/documentations/');
+
+		if(response.ok) {
+			const data = await response.json();
+			setDocuments(data);
+		} else {
+			alert(response.error);
+		}
+	}
+
+	useEffect(() => {
+		getDocuments();
+	}, [])
+	
 	return (
 		<div>
 			<Navbar open={callbackStateModal}/>
@@ -18,7 +34,7 @@ const Home = () => {
 			{ closed === false ? <LoginModal close = {callbackStateModal}/> : <div></div> }
 
 			{/* home content */}
-			<div className='mt-20'>
+			<div>
 				{/* main content */}
 				<div>
 					{/* search & filter bar */}
@@ -33,21 +49,11 @@ const Home = () => {
 
 					{/* documentation results filtered */}
 					<div className='mt-8 grid grid-cols-1 md:grid-rows-4 md:grid-cols-5 gap-4'>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
-						<Document title="Document"/>
+						{
+							documents.map((document) => {
+								return <Document key={document._id} document={document} />
+							})
+						}
 					</div>
 				</div>
 			</div>

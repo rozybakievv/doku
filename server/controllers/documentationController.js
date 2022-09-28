@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Documentation = require('../models/documentationModel');
 
-// @route  GET /api/documentation
+// @route  GET /api/documentation/
 // @access PUBLIC
 const getAllDocumentations = asyncHandler(async(req, res) => {
     const documentations = await Documentation.find();

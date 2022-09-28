@@ -28,7 +28,7 @@ const LoginModal = (props) => {
 			headers: { 'Content-Type': 'application/json' },
 		});
 	
-		if (response.status === 201) {
+		if (response.ok) {
 			const data = await response.json();
 			tokenMethod.setToken(data.token);
 			userMethod.setUser(data.user);
