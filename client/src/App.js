@@ -1,14 +1,25 @@
+import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 
+export const UserContext = React.createContext();
+
 const App = () => {
+	const [token, setToken] = useState('');
+	const tokenMethod = { token, setToken };
+	const [user, setUser] = useState({});
+	const userMethod = { user, setUser };
+
 	return (
 		<div className='px-12 py-8'>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<Home/>} />
-				</Routes>
-			</BrowserRouter>
+			<UserContext.Provider value={{ tokenMethod, userMethod }}>
+				<BrowserRouter>
+					<Routes>
+						<Route path='/' element={<Home/>} />
+					</Routes>
+				</BrowserRouter>
+			</UserContext.Provider>
 		</div>
 	);
 }

@@ -1,7 +1,10 @@
 import { useState } from "react"
-import auth from "../api/auth";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 const LoginModal = (props) => {
+	// retrieve context method variables from /App
+	const { tokenMethod, userMethod } = useContext(UserContext);
 	const [info, setInfo] = useState({ email: '', password: '' });
 
 	const inputHandler = (e) => {
@@ -14,6 +17,24 @@ const LoginModal = (props) => {
 
 	const close = () => {
 		props.close(true);
+	}
+
+	const auth = async(email, password) => {
+		const body = {email: email, password: password};
+	
+		const response = await fetch("/api/users/login/", {
+			method: 'POST',
+			body: JSON.stringify(body),
+			headers: { 'Content-Type': 'application/json' },
+		});
+	
+		if (response.status === 201) {
+			const data = await response.json();
+			tokenMethod.setToken(data.token);
+			userMethod.setUser(data.user);
+		} else {
+			alert(response.error);
+		}
 	}
 
 	const authenticate = (e) => {
@@ -54,6 +75,7 @@ const LoginModal = (props) => {
 								</svg>
 							</button>
 							<button type="button" onClick={close} className="items-center duration-200 inline-flex w-full justify-center rounded-md px-4 py-2 text-base font-medium shadow-sm hover:opacity-80 sm:mt-0 sm:w-auto sm:text-sm hover:underline">Cancel</button>
+
 						</div>
 					</div>
 				</div>

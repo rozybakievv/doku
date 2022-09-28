@@ -80,7 +80,7 @@ const authenticateUser = asyncHandler(async(req, res) => {
 
     // check if user exists and if the hashed password compares with bcrypt, then send a jwt
     if(user && (await bcrypt.compare(password, user.password))) {
-        res.status(201).json({ token: generateJwt(user._id), id: user._id });
+        res.status(201).json({ token: generateJwt(user._id), user: user });
     } else {
         res.status(400);
         throw new Error('Invalid credentials');

@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { useContext } from "react";
+
 
 const Navbar = (props) => {
+	const { tokenMethod, userMethod } = useContext(UserContext);
+
 	const open = () => {
 		props.open(false);
+	}
+
+	const test = () => {
+		console.log(tokenMethod.token);
 	}
 
 	return (
@@ -22,17 +31,32 @@ const Navbar = (props) => {
 			</div>
 
 			{/* right buttons */}
-			<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
-				<div className="md:flex-grow"></div>
-				<div>
-					<button type="button" className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
-						register
-					</button>
-					<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
-						login
-					</button>
+			{
+				tokenMethod.token === "" ?
+				<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
+					<div className="md:flex-grow"></div>
+					<div>
+						<button type="button" onClick={test} className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
+							register
+						</button>
+						<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
+							login
+						</button>
+					</div>
 				</div>
-			</div>
+				: 
+				<div className="items-center flex-grow hidden w-full md:flex md:items-center md:w-auto">
+					<div className="md:flex-grow"></div>
+					<div>
+						<button type="button" onClick={test} className="block mr-8 md:inline-block md:mt-0 font-bold hover:opacity-80 duration-200">
+							post
+						</button>
+						<button type="button" onClick={open} className="block bg-gradient-to-r from-indigo-300 to-purple-400 md:inline-block md:mt-0 px-6 py-4 duration-200 rounded-xl font-bold hover:border-violet-400 hover:opacity-80 hover:outline-none hover:ring-2 hover:ring-indigo-300 hover:ring-offset-2">
+							Welcome { userMethod.user.username }
+						</button>
+					</div>
+				</div>
+			}
 		</nav>
 	)
 }
